@@ -7,10 +7,6 @@ class Flag {
 
     void start() {
         flagMap = new Matrix(Box.CLOSED);
-//        Coord coord = new Coord(4, 4);
-//        for (Coord around : Ranges.getCoordsArround(coord)) {
-//            flagMap.set(around, Box.OPENED);
-//        }
 
     }
 
@@ -18,11 +14,25 @@ class Flag {
         return flagMap.get(coord);
     }
 
-    public void setOpenedToBox(Coord coord) {
+    void setOpenedToBox(Coord coord) {
         flagMap.set(coord, Box.OPENED);
     }
 
-    public void setFlaggedToBox(Coord coord) {
+    private void setFlaggedToBox(Coord coord) {
         flagMap.set(coord, Box.FLAGGED);
     }
+
+    private void setClosedToBox(Coord coord) {
+        flagMap.set(coord, Box.CLOSED);
+    }
+    void toggleFlaggedToBox(Coord coord) {
+        switch (flagMap.get(coord)) {
+            case FLAGGED -> setClosedToBox(coord);
+            case CLOSED -> setFlaggedToBox(coord);
+        }
+    }
+
+
+
+
 }
