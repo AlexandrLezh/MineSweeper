@@ -61,7 +61,6 @@ public class MineSweeper extends JFrame {
         for(Box box : Box.values()) {
             box.image = getImage(box.name().toLowerCase());
         }
-        setIconImage(getImage("icon"));
     }
     private Image getImage(String name) {
         String fileName = "img/" + name + ".png";
