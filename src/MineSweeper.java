@@ -19,7 +19,7 @@ public class MineSweeper extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawLine(0,0,500,300);
+                g.drawImage(getImage(), 0, 0, this);
             }
         };
         panel.setPreferredSize(new Dimension(500, 300));
@@ -33,6 +33,11 @@ public class MineSweeper extends JFrame {
         setResizable(false);
         pack();
         setLocationRelativeTo(null);
+    }
+
+    private Image getImage() {
+        ImageIcon icon = new ImageIcon("res/img/bomb.png");
+        return icon.getImage();
     }
 
 }
