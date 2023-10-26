@@ -3,6 +3,9 @@ import java.awt.*;
 
 public class MineSweeper extends JFrame {
 
+    private final int IMAGE_SIZE = 50;
+    private final int COLS = 15;
+    private final int ROWS = 10;
     private JPanel panel;
 
     public static void main(String[] args) {
@@ -20,12 +23,21 @@ public class MineSweeper extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(getImage("bomb"), 0, 0, this);
-                g.drawImage(getImage("num1"), 50, 0, this);
-                g.drawImage(getImage("num1"), 50, 50, this);
-                g.drawImage(getImage("num1"), 0, 50, this);
+                g.drawImage(getImage("num1"), IMAGE_SIZE, 0, this);
+                g.drawImage(getImage("num1"), IMAGE_SIZE, IMAGE_SIZE, this);
+                g.drawImage(getImage("num1"), 0, IMAGE_SIZE, this);
             }
         };
-        panel.setPreferredSize(new Dimension(500, 300));
+        setUpPanelSize();
+    }
+
+    private void setUpPanelSize() {
+        int widthPanel = COLS * IMAGE_SIZE;
+        int heightPanel = ROWS * IMAGE_SIZE;
+
+        Dimension panelSize = new Dimension(widthPanel, heightPanel);
+
+        panel.setPreferredSize(panelSize);
         add(panel);
     }
 
