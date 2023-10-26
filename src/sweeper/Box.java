@@ -1,5 +1,8 @@
+package sweeper;
+
 public enum Box {
     ZERO,
+    BOMB,
     NUM1,
     NUM2,
     NUM3,
@@ -8,14 +11,12 @@ public enum Box {
     NUM6,
     NUM7,
     NUM8,
-    NUM9,
-    BOMB,
 
     OPENED,
     CLOSED,
     NOBOMB,
     BOMBED,
-    FLAGGED;
+    FLAGGED
 
 
 }

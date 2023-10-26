@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import sweeper.Box;
 
 public class MineSweeper extends JFrame {
 
@@ -22,10 +23,9 @@ public class MineSweeper extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(getImage("bomb"), 0, 0, this);
-                g.drawImage(getImage("num1"), IMAGE_SIZE, 0, this);
-                g.drawImage(getImage("num1"), IMAGE_SIZE, IMAGE_SIZE, this);
-                g.drawImage(getImage("num1"), 0, IMAGE_SIZE, this);
+                for (Box box : Box.values()) {
+                    g.drawImage(getImage(box.name().toLowerCase()), box.ordinal() * IMAGE_SIZE, 0, this);
+                }
             }
         };
         setUpPanelSize();
