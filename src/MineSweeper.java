@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import sweeper.Box;
 import sweeper.Coord;
+import sweeper.Ranges;
 
 public class MineSweeper extends JFrame {
 
@@ -15,6 +16,7 @@ public class MineSweeper extends JFrame {
     }
 
     private MineSweeper() {
+        Ranges.setSize(COLS, ROWS);
         setImages();
         initPanel();
         initFrame();
@@ -37,8 +39,8 @@ public class MineSweeper extends JFrame {
     }
 
     private void setUpPanelSize() {
-        int widthPanel = COLS * IMAGE_SIZE;
-        int heightPanel = ROWS * IMAGE_SIZE;
+        int widthPanel = Ranges.getSize().x * IMAGE_SIZE;
+        int heightPanel = Ranges.getSize().y * IMAGE_SIZE;
 
         Dimension panelSize = new Dimension(widthPanel, heightPanel);
 
