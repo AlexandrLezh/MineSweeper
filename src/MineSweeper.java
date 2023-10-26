@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import sweeper.Box;
 import sweeper.Coord;
+import sweeper.Game;
 import sweeper.Ranges;
 
 public class MineSweeper extends JFrame {
@@ -10,13 +11,13 @@ public class MineSweeper extends JFrame {
     private final int COLS = 9;
     private final int ROWS = 9;
     private JPanel panel;
-
+    private Game game;
     public static void main(String[] args) {
         new MineSweeper().setVisible(true);
     }
 
     private MineSweeper() {
-        Ranges.setSize(COLS, ROWS);
+        game = new Game(COLS, ROWS);
         setImages();
         initPanel();
         initFrame();
@@ -28,7 +29,7 @@ public class MineSweeper extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 for (Coord coord : Ranges.getAllCoord()) {
-                    g.drawImage((Image) Box.values()[(coord.x + coord.y) % Box.values().length].image,
+                    g.drawImage((Image) game.getBox(coord).image,
                             coord.x * IMAGE_SIZE,
                             coord.y * IMAGE_SIZE, this);
                 }
