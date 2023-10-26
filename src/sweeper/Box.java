@@ -2,7 +2,6 @@ package sweeper;
 
 public enum Box {
     ZERO,
-    BOMB,
     NUM1,
     NUM2,
     NUM3,
@@ -11,12 +10,18 @@ public enum Box {
     NUM6,
     NUM7,
     NUM8,
+    BOMB,
 
     OPENED,
     CLOSED,
-    NOBOMB,
+    FLAGGED,
     BOMBED,
-    FLAGGED;
+    NOBOMB;
 
     public Object image;
+
+    Box nextNumberBox() {
+        return Box.values()[this.ordinal() + 1];
+    }
+
 }
