@@ -25,7 +25,7 @@ public class MineSweeper extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 for (Box box : Box.values()) {
-                    g.drawImage(box.image, box.ordinal() * IMAGE_SIZE, 0, this);
+                    g.drawImage((Image) box.image, box.ordinal() * IMAGE_SIZE, 0, this);
                 }
             }
         };

@@ -1,7 +1,5 @@
 package sweeper;
 
-import java.awt.*;
-
 public enum Box {
     ZERO,
     BOMB,
@@ -20,5 +18,5 @@ public enum Box {
     BOMBED,
     FLAGGED;
 
-    public Image image;
+    public Object image;
 }
