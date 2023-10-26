@@ -14,6 +14,7 @@ public class MineSweeper extends JFrame {
     }
 
     private MineSweeper() {
+        setImages();
         initPanel();
         initFrame();
     }
@@ -24,7 +25,7 @@ public class MineSweeper extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 for (Box box : Box.values()) {
-                    g.drawImage(getImage(box.name().toLowerCase()), box.ordinal() * IMAGE_SIZE, 0, this);
+                    g.drawImage(box.image, box.ordinal() * IMAGE_SIZE, 0, this);
                 }
             }
         };
@@ -50,6 +51,11 @@ public class MineSweeper extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    private void setImages() {
+        for(Box box : Box.values()) {
+            box.image = getImage(box.name().toLowerCase());
+        }
+    }
     private Image getImage(String name) {
         ImageIcon icon = new ImageIcon("res/img/" + name + ".png");
         return icon.getImage();
