@@ -3,16 +3,24 @@ import java.awt.*;
 
 public class MineSweeper extends JFrame {
 
-    JPanel panel;
+    private JPanel panel;
 
     public static void main(String[] args) {
         new MineSweeper().setVisible(true);
     }
 
-    public MineSweeper() {
+    private MineSweeper() {
+        initPanel();
+        initFrame();
+    }
+
+    private void initPanel() {
         panel= new JPanel();
         panel.setPreferredSize(new Dimension(500, 300));
         add(panel);
+    }
+
+    private void initFrame() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mine Sweeper");
         setVisible(true);
@@ -20,4 +28,5 @@ public class MineSweeper extends JFrame {
         pack();
         setLocationRelativeTo(null);
     }
+
 }
