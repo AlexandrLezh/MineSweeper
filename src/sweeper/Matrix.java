@@ -9,4 +9,17 @@ class Matrix {
             matrix[coord.x][coord.y] = box;
         }
     }
+
+    Box get(Coord coord) {
+        if (Ranges.inRange(coord)) {
+            return matrix[coord.x][coord.y];
+        }
+        return null;
+    }
+
+    void set(Coord coord, Box box) {
+        if (Ranges.inRange(coord)) {
+            matrix[coord.x][coord.y] = box;
+        }
+    }
 }
