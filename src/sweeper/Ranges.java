@@ -6,11 +6,11 @@ import java.util.Random;
 public class Ranges {
     private static Coord size;
     private static ArrayList<Coord> allCoord;
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     static void setSize(Coord size) {
         Ranges.size = size;
-        allCoord = new ArrayList<Coord>();
+        allCoord = new ArrayList<>();
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
                 allCoord.add(new Coord(x, y));
@@ -26,7 +26,7 @@ public class Ranges {
         return allCoord;
     }
 
-    public static boolean inRange(Coord coord) {
+    static boolean inRange(Coord coord) {
         return coord.x >= 0 && coord.x < size.x &&
                coord.y >= 0 && coord.y < size.y;
     }
