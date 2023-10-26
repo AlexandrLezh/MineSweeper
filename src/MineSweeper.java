@@ -37,6 +37,8 @@ public class MineSweeper extends JFrame {
                 }
             }
         };
+        game.pressLeftButton(new Coord(4, 4));
+        game.pressRightButton(new Coord(7, 7));
         setUpPanelSize();
     }
 
