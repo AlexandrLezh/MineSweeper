@@ -48,10 +48,17 @@ public class Game {
             case FLAGGED : break;
             case CLOSED :
                 switch (bomb.get(coord)) {
-                    case ZERO : break;
+                    case ZERO : openBoxesAroundZero(coord); break;
                     case BOMB : break;
                     default : flag.setOpenedToBox(coord); break;
                 }
+        }
+    }
+
+    private void openBoxesAroundZero(Coord coord) {
+        flag.setOpenedToBox(coord);
+        for (Coord around : Ranges.getCoordsArround(coord)) {
+            openBox(around);
         }
     }
 }
