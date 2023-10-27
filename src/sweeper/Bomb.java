@@ -16,24 +16,24 @@ class Bomb {
         }
     }
 
-    Box get(Coord coord) {
-        return bombMap.get(coord);
+    Box get(Cell cell) {
+        return bombMap.get(cell);
     }
 
     private void placeBomb() {
         while (true) {
-            Coord coord = Ranges.getRandomCoord();
-            if (Box.BOMB == bombMap.get(coord)) {
+            Cell cell = Ranges.getRandomCoord();
+            if (Box.BOMB == bombMap.get(cell)) {
                 continue;
             }
-            bombMap.set(coord, Box.BOMB);
-            incNumbersAroundBomb(coord);
+            bombMap.set(cell, Box.BOMB);
+            incNumbersAroundBomb(cell);
             break;
         }
     }
 
-    private void incNumbersAroundBomb(Coord coord) {
-        for (Coord around : Ranges.getCoordsArround(coord)){
+    private void incNumbersAroundBomb(Cell cell) {
+        for (Cell around : Ranges.getCoordsArround(cell)){
             if (Box.BOMB != bombMap.get(around)) {
                 bombMap.set(around, bombMap.get(around).nextNumberBox());
             }

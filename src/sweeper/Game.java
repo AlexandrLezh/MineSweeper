@@ -9,7 +9,7 @@ public class Game {
     private GameState state;
 
     public Game(int cols, int rows, int bombs) {
-        Ranges.setSize(new Coord(cols, rows));
+        Ranges.setSize(new Cell(cols, rows));
         bomb = new Bomb(bombs);
         flag = new Flag();
 
@@ -20,21 +20,21 @@ public class Game {
        flag.start();
        state = GameState.PLAYED;
     }
-    public Box getBox(Coord coord) {
-        if (Box.OPENED == flag.get(coord)) {
-            return bomb.get(coord);
+    public Box getBox(Cell cell) {
+        if (Box.OPENED == flag.get(cell)) {
+            return bomb.get(cell);
         } else {
-            return flag.get(coord);
+            return flag.get(cell);
         }
     }
 
-    public void pressLeftButton(Coord coord) {
-        openBox(coord);
+    public void pressLeftButton(Cell cell) {
+        openBox(cell);
 
     }
 
-    public void pressRightButton(Coord coord) {
-        flag.toggleFlaggedToBox(coord);
+    public void pressRightButton(Cell cell) {
+        flag.toggleFlaggedToBox(cell);
     }
 
     public int getTotalBombs() {
@@ -48,22 +48,22 @@ public class Game {
         return state;
     }
 
-    private void openBox(Coord coord) {
-        switch(flag.get(coord)) {
+    private void openBox(Cell cell) {
+        switch(flag.get(cell)) {
             case OPENED : break;
             case FLAGGED : break;
             case CLOSED :
-                switch (bomb.get(coord)) {
-                    case ZERO : openBoxesAroundZero(coord); break;
+                switch (bomb.get(cell)) {
+                    case ZERO : openBoxesAroundZero(cell); break;
                     case BOMB : break;
-                    default : flag.setOpenedToBox(coord); break;
+                    default : flag.setOpenedToBox(cell); break;
                 }
         }
     }
 
-    private void openBoxesAroundZero(Coord coord) {
-        flag.setOpenedToBox(coord);
-        for (Coord around : Ranges.getCoordsArround(coord)) {
+    private void openBoxesAroundZero(Cell cell) {
+        flag.setOpenedToBox(cell);
+        for (Cell around : Ranges.getCoordsArround(cell)) {
             openBox(around);
         }
     }

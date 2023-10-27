@@ -1,19 +1,19 @@
 package sweeper;
 
-public class Coord {
+public class Cell {
     public int x;
     public int y;
 
-    public Coord(int x, int y) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Coord))
+        if (!(obj instanceof Cell))
             return super.equals(obj);
-        Coord toCoord = (Coord) obj;
-        return toCoord.x == x && toCoord.y == y;
+        Cell toCell = (Cell) obj;
+        return toCell.x == x && toCell.y == y;
     }
 }

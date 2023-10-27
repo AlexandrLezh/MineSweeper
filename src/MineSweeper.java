@@ -1,5 +1,5 @@
 import sweeper.Box;
-import sweeper.Coord;
+import sweeper.Cell;
 import sweeper.Game;
 import sweeper.Ranges;
 
@@ -41,10 +41,10 @@ public class MineSweeper extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                for (Coord coord : Ranges.getAllCoord()) {
-                    g.drawImage((Image) game.getBox(coord).image,
-                            coord.x * IMAGE_SIZE,
-                            coord.y * IMAGE_SIZE, this);
+                for (Cell cell : Ranges.getAllCoord()) {
+                    g.drawImage((Image) game.getBox(cell).image,
+                            cell.x * IMAGE_SIZE,
+                            cell.y * IMAGE_SIZE, this);
                 }
             }
         };
@@ -53,10 +53,10 @@ public class MineSweeper extends JFrame {
             public void mousePressed(MouseEvent e) {
                 int x = e.getX() / IMAGE_SIZE;
                 int y = e.getY() / IMAGE_SIZE;
-                Coord coord = new Coord(x, y);
+                Cell cell = new Cell(x, y);
                 switch (e.getButton()) {
-                    case MouseEvent.BUTTON1 -> game.pressLeftButton(coord);
-                    case MouseEvent.BUTTON3 -> game.pressRightButton(coord);
+                    case MouseEvent.BUTTON1 -> game.pressLeftButton(cell);
+                    case MouseEvent.BUTTON3 -> game.pressRightButton(cell);
                     case MouseEvent.BUTTON2 -> game.start();
                 }
                 label.setText(getMessage());

@@ -21,27 +21,27 @@ class Flag {
     int getTotalClosed() {
         return totalClosed;
     }
-    Box get(Coord coord) {
-        return flagMap.get(coord);
+    Box get(Cell cell) {
+        return flagMap.get(cell);
     }
 
-    void setOpenedToBox(Coord coord) {
-        flagMap.set(coord, Box.OPENED);
+    void setOpenedToBox(Cell cell) {
+        flagMap.set(cell, Box.OPENED);
     }
 
-    private void setFlaggedToBox(Coord coord) {
-        flagMap.set(coord, Box.FLAGGED);
+    private void setFlaggedToBox(Cell cell) {
+        flagMap.set(cell, Box.FLAGGED);
         totalFlagged++; //todo move to setter
     }
 
-    private void setClosedToBox(Coord coord) {
-        flagMap.set(coord, Box.CLOSED);
+    private void setClosedToBox(Cell cell) {
+        flagMap.set(cell, Box.CLOSED);
         totalFlagged--; //todo move to setter
     }
-    void toggleFlaggedToBox(Coord coord) {
-        switch (flagMap.get(coord)) {
-            case FLAGGED -> setClosedToBox(coord);
-            case CLOSED -> setFlaggedToBox(coord);
+    void toggleFlaggedToBox(Cell cell) {
+        switch (flagMap.get(cell)) {
+            case FLAGGED -> setClosedToBox(cell);
+            case CLOSED -> setFlaggedToBox(cell);
         }
     }
 

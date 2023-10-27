@@ -5,21 +5,21 @@ class Matrix {
 
     Matrix(Box box) {
         matrix = new Box[Ranges.getSize().x][Ranges.getSize().y];
-        for (Coord coord : Ranges.getAllCoord()) {
-            matrix[coord.x][coord.y] = box;
+        for (Cell cell : Ranges.getAllCoord()) {
+            matrix[cell.x][cell.y] = box;
         }
     }
 
-    Box get(Coord coord) {
-        if (Ranges.inRange(coord)) {
-            return matrix[coord.x][coord.y];
+    Box get(Cell cell) {
+        if (Ranges.inRange(cell)) {
+            return matrix[cell.x][cell.y];
         }
         return null;
     }
 
-    void set(Coord coord, Box box) {
-        if (Ranges.inRange(coord)) {
-            matrix[coord.x][coord.y] = box;
+    void set(Cell cell, Box box) {
+        if (Ranges.inRange(cell)) {
+            matrix[cell.x][cell.y] = box;
         }
     }
 }
