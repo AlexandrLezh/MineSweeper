@@ -15,6 +15,7 @@ public class MineSweeper extends JFrame {
     private final int ROWS = 9;
     private final int BOMBS = 10;
     private JPanel panel;
+    private JLabel label;
     private Game game;
     public static void main(String[] args) {
         new MineSweeper().setVisible(true);
@@ -25,9 +26,16 @@ public class MineSweeper extends JFrame {
         game.start();
         setImages();
         initPanel();
+        initLabel();
         initFrame();
     }
 
+    private  void initLabel() {
+        Font font = new Font("Tahoma", Font.BOLD, 18);
+        label = new JLabel("Welcome !");
+        label.setFont(font);
+        add (label, BorderLayout.SOUTH);
+    }
     private void initPanel() {
         panel = new JPanel() {
             @Override
