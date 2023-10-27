@@ -70,4 +70,14 @@ class Flag {
             flagMap.set(cell, Box.NOBOMB);
         }
     }
+
+    int getCountOfFlaggedBoxesAround(Cell cell) {
+        int countFlags = 0;
+        for (Cell around : Ranges.getCoordsArround(cell)) {
+            if (flagMap.get(around) == Box.FLAGGED) {
+                countFlags++;
+            }
+        }
+        return countFlags;
+    }
 }

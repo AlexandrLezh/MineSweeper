@@ -74,22 +74,26 @@ public class Game {
 
     private void openBox(Cell cell) {
         switch(flag.get(cell)) {
-            case OPENED:
-                break;
-            case FLAGGED:
-                break;
-            case CLOSED:
+            case OPENED : setOpenedToClosedBoxesAroundNumber(cell); break;
+            case FLAGGED : break;
+            case CLOSED :
                 switch (bomb.get(cell)) {
-                    case ZERO:
-                        openBoxesAroundZero(cell);
-                        break;
-                    case BOMB:
-                        openBombs(cell);
-                        break;
-                    default:
-                        flag.setOpenedToBox(cell);
-                        break;
+                    case ZERO : openBoxesAroundZero(cell); break;
+                    case BOMB : openBombs(cell); break;
+                    default : flag.setOpenedToBox(cell); break;
                 }
+        }
+    }
+
+    private void setOpenedToClosedBoxesAroundNumber(Cell cell) {
+        if (Box.BOMB != bomb.get(cell)) {
+            if (bomb.get(cell).getNumber() == flag.getCountOfFlaggedBoxesAround(cell)) {
+                for (Cell around : Ranges.getCoordsArround(cell)) {
+                    if (Box.CLOSED == flag.get(around)) {
+                        openBox(around);
+                    }
+                }
+            }
         }
     }
 
