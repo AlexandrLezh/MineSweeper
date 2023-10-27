@@ -5,7 +5,7 @@ class Matrix {
 
     Matrix(Box box) {
         matrix = new Box[Ranges.getSize().x][Ranges.getSize().y];
-        for (Cell cell : Ranges.getAllCoord()) {
+        for (Cell cell : Ranges.getAllCells()) {
             matrix[cell.x][cell.y] = box;
         }
     }

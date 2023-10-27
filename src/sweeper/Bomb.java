@@ -22,7 +22,7 @@ class Bomb {
 
     private void placeBomb() {
         while (true) {
-            Cell cell = Ranges.getRandomCoord();
+            Cell cell = Ranges.getRandomCell();
             if (Box.BOMB == bombMap.get(cell)) {
                 continue;
             }
@@ -33,7 +33,7 @@ class Bomb {
     }
 
     private void incNumbersAroundBomb(Cell cell) {
-        for (Cell around : Ranges.getCoordsArround(cell)){
+        for (Cell around : Ranges.getCellsAround(cell)){
             if (Box.BOMB != bombMap.get(around)) {
                 bombMap.set(around, bombMap.get(around).nextNumberBox());
             }

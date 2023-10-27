@@ -8,6 +8,14 @@ public class Ranges {
     private static ArrayList<Cell> allCell;
     private static final Random random = new Random();
 
+    public static Cell getSize(){
+        return size;
+    }
+
+    public static ArrayList<Cell> getAllCells() {
+        return allCell;
+    }
+
     static void setSize(Cell size) {
         Ranges.size = size;
         allCell = new ArrayList<>();
@@ -18,24 +26,16 @@ public class Ranges {
         }
     }
 
-    public static Cell getSize(){
-        return size;
-    }
-
-    public static ArrayList<Cell> getAllCoord() {
-        return allCell;
-    }
-
     static boolean inRange(Cell cell) {
         return cell.x >= 0 && cell.x < size.x &&
                cell.y >= 0 && cell.y < size.y;
     }
 
-    static Cell getRandomCoord() {
+    static Cell getRandomCell() {
         return new Cell(random.nextInt(size.x), random.nextInt(size.y));
     }
 
-    static ArrayList<Cell> getCoordsArround(Cell cell) {
+    static ArrayList<Cell> getCellsAround(Cell cell) {
         ArrayList<Cell> list = new ArrayList<>();
         for (int x = cell.x - 1; x <= cell.x + 1; x++) {
             for (int y = cell.y - 1; y <= cell.y + 1; y++) {

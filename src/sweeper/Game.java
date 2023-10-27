@@ -28,14 +28,6 @@ public class Game {
         }
     }
 
-    public void pressLeftButton(Cell cell) {
-        if (isGameOver()) {
-            return;
-        }
-        openBox(cell);
-        checkWinner();
-    }
-
     private void checkWinner() {
         if (GameState.PLAYED == state) {
             if (flag.getTotalClosed() == bomb.getTotalBombs()) {
@@ -43,6 +35,14 @@ public class Game {
                 flag.setFlaggedToLastClosedBoxes();
             }
         }
+    }
+
+    public void pressLeftButton(Cell cell) {
+        if (isGameOver()) {
+            return;
+        }
+        openBox(cell);
+        checkWinner();
     }
 
     public void pressRightButton(Cell cell) {
@@ -88,7 +88,7 @@ public class Game {
     private void setOpenedToClosedBoxesAroundNumber(Cell cell) {
         if (Box.BOMB != bomb.get(cell)) {
             if (bomb.get(cell).getNumber() == flag.getCountOfFlaggedBoxesAround(cell)) {
-                for (Cell around : Ranges.getCoordsArround(cell)) {
+                for (Cell around : Ranges.getCellsAround(cell)) {
                     if (Box.CLOSED == flag.get(around)) {
                         openBox(around);
                     }
@@ -99,7 +99,7 @@ public class Game {
 
     private void openBombs(Cell bombedCell) {
         flag.setBombedToBox(bombedCell);
-        for (Cell cell : Ranges.getAllCoord()) {
+        for (Cell cell : Ranges.getAllCells()) {
             if (bomb.get(cell) == Box.BOMB) {
                 flag.setOpenedToClosedBox(cell);
             } else {
@@ -111,7 +111,7 @@ public class Game {
 
     private void openBoxesAroundZero(Cell cell) {
         flag.setOpenedToBox(cell);
-        for (Cell around : Ranges.getCoordsArround(cell)) {
+        for (Cell around : Ranges.getCellsAround(cell)) {
             openBox(around);
         }
     }

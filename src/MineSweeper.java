@@ -41,7 +41,7 @@ public class MineSweeper extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                for (Cell cell : Ranges.getAllCoord()) {
+                for (Cell cell : Ranges.getAllCells()) {
                     g.drawImage((Image) game.getBox(cell).image,
                             cell.x * IMAGE_SIZE,
                             cell.y * IMAGE_SIZE, this);
@@ -111,7 +111,6 @@ public class MineSweeper extends JFrame {
                             game.getTotalFlaged() + " of " +
                             game.getTotalBombs() + " bombs.";
                 }
-
         }
     }
 

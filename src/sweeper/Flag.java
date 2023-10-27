@@ -2,9 +2,6 @@ package sweeper;
 
 class Flag {
     private Matrix flagMap;
-
-
-
     private int totalFlagged;
     private int totalClosed;
 
@@ -27,17 +24,17 @@ class Flag {
 
     void setOpenedToBox(Cell cell) {
         flagMap.set(cell, Box.OPENED);
-        totalClosed--; //todo move to setter
+        totalClosed--;
     }
 
     private void setFlaggedToBox(Cell cell) {
         flagMap.set(cell, Box.FLAGGED);
-        totalFlagged++; //todo move to setter
+        totalFlagged++;
     }
 
     private void setClosedToBox(Cell cell) {
         flagMap.set(cell, Box.CLOSED);
-        totalFlagged--; //todo move to setter
+        totalFlagged--;
     }
     void toggleFlaggedToBox(Cell cell) {
         switch (flagMap.get(cell)) {
@@ -48,7 +45,7 @@ class Flag {
 
 
     public void setFlaggedToLastClosedBoxes() {
-        for (Cell cell : Ranges.getAllCoord()) {
+        for (Cell cell : Ranges.getAllCells()) {
             if (Box.CLOSED == flagMap.get(cell)) {
                 setFlaggedToBox(cell);
             }
@@ -73,7 +70,7 @@ class Flag {
 
     int getCountOfFlaggedBoxesAround(Cell cell) {
         int countFlags = 0;
-        for (Cell around : Ranges.getCoordsArround(cell)) {
+        for (Cell around : Ranges.getCellsAround(cell)) {
             if (flagMap.get(around) == Box.FLAGGED) {
                 countFlags++;
             }
