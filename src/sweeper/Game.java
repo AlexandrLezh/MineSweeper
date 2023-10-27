@@ -3,6 +3,11 @@ package sweeper;
 public class Game {
     private final Bomb bomb;
     private final Flag flag;
+
+
+
+    private GameState state;
+
     public Game(int cols, int rows, int bombs) {
         Ranges.setSize(new Coord(cols, rows));
         bomb = new Bomb(bombs);
@@ -13,6 +18,7 @@ public class Game {
     public void start() {
        bomb.start();
        flag.start();
+       state = GameState.PLAYED;
     }
     public Box getBox(Coord coord) {
         if (Box.OPENED == flag.get(coord)) {
@@ -28,5 +34,9 @@ public class Game {
 
     public void pressRightButton(Coord coord) {
         flag.toggleFlaggedToBox(coord);
+    }
+
+    public GameState getState() {
+        return state;
     }
 }
