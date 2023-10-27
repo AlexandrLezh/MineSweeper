@@ -58,4 +58,16 @@ class Flag {
     public void setBombedToBox(Cell cell) {
         flagMap.set(cell, Box.BOMBED);
     }
+
+    public void setOpenedToClosedBox(Cell cell) {
+        if (Box.CLOSED == flagMap.get(cell)) {
+            flagMap.set(cell, Box.OPENED);
+        }
+    }
+
+    public void setNoBombToFlaggedBox(Cell cell) {
+        if (Box.FLAGGED == flagMap.get(cell)) {
+            flagMap.set(cell, Box.NOBOMB);
+        }
+    }
 }

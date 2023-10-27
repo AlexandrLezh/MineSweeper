@@ -101,7 +101,7 @@ public class MineSweeper extends JFrame {
             case WINNER:
                 return "Congratulation ! All bombs marked";
             case BOMBED:
-                return "You Lose !";
+                return "BOOM ! You Lose !";
             case PLAYED:
             default:
                 if (game.getTotalFlaged() == 0) {
