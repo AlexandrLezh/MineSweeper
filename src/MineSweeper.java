@@ -32,7 +32,7 @@ public class MineSweeper extends JFrame {
 
     private  void initLabel() {
         Font font = new Font("Tahoma", Font.BOLD, 18);
-        label = new JLabel("Welcome !");
+        label = new JLabel(getMessage());
         label.setFont(font);
         add (label, BorderLayout.SOUTH);
     }
@@ -59,6 +59,7 @@ public class MineSweeper extends JFrame {
                     case MouseEvent.BUTTON3 -> game.pressRightButton(coord);
                     case MouseEvent.BUTTON2 -> game.start();
                 }
+                label.setText(getMessage());
                 panel.repaint();
             }
         });
@@ -93,6 +94,15 @@ public class MineSweeper extends JFrame {
         String fileName = "img/" + name + ".png";
         ImageIcon icon = new ImageIcon(getClass().getResource(fileName));
         return icon.getImage();
+    }
+
+    private String getMessage() {
+        switch (game.getState()) {
+            case WINNER : return "Congratulation ! All bombs marked";
+            case BOMBED: return "You Lose !";
+            case PLAYED :
+            default: return "Welcome !";
+        }
     }
 
 }
