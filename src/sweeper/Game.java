@@ -29,6 +29,9 @@ public class Game {
     }
 
     public void pressLeftButton(Cell cell) {
+        if (isGameOver()) {
+            return;
+        }
         openBox(cell);
         checkWinner();
     }
@@ -43,7 +46,18 @@ public class Game {
     }
 
     public void pressRightButton(Cell cell) {
+        if (isGameOver()) {
+            return;
+        }
         flag.toggleFlaggedToBox(cell);
+    }
+
+    private boolean isGameOver() {
+        if (GameState.PLAYED != state) {
+            start();
+            return true;
+        }
+        return false;
     }
 
     public int getTotalBombs() {
@@ -53,21 +67,35 @@ public class Game {
     public int getTotalFlaged() {
         return flag.getTotalFlagged();
     }
+
     public GameState getState() {
         return state;
     }
 
     private void openBox(Cell cell) {
         switch(flag.get(cell)) {
-            case OPENED : break;
-            case FLAGGED : break;
-            case CLOSED :
+            case OPENED:
+                break;
+            case FLAGGED:
+                break;
+            case CLOSED:
                 switch (bomb.get(cell)) {
-                    case ZERO : openBoxesAroundZero(cell); break;
-                    case BOMB : break;
-                    default : flag.setOpenedToBox(cell); break;
+                    case ZERO:
+                        openBoxesAroundZero(cell);
+                        break;
+                    case BOMB:
+                        openBombs(cell);
+                        break;
+                    default:
+                        flag.setOpenedToBox(cell);
+                        break;
                 }
         }
+    }
+
+    private void openBombs(Cell bombedCell) {
+        flag.setBombedToBox(bombedCell);
+        state = GameState.BOMBED;
     }
 
     private void openBoxesAroundZero(Cell cell) {

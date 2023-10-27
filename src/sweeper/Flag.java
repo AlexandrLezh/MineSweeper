@@ -54,4 +54,8 @@ class Flag {
             }
         }
     }
+
+    public void setBombedToBox(Cell cell) {
+        flagMap.set(cell, Box.BOMBED);
+    }
 }
