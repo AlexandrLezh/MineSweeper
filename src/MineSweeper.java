@@ -1,12 +1,12 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import sweeper.Box;
 import sweeper.Coord;
 import sweeper.Game;
 import sweeper.Ranges;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MineSweeper extends JFrame {
 
@@ -98,10 +98,20 @@ public class MineSweeper extends JFrame {
 
     private String getMessage() {
         switch (game.getState()) {
-            case WINNER : return "Congratulation ! All bombs marked";
-            case BOMBED: return "You Lose !";
-            case PLAYED :
-            default: return "Welcome !";
+            case WINNER:
+                return "Congratulation ! All bombs marked";
+            case BOMBED:
+                return "You Lose !";
+            case PLAYED:
+            default:
+                if (game.getTotalFlaged() == 0) {
+                    return "Welcome !";
+                } else {
+                    return "Think twice ! Flagged " +
+                            game.getTotalFlaged() + " of " +
+                            game.getTotalBombs() + " bombs.";
+                }
+
         }
     }
 

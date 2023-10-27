@@ -35,9 +35,15 @@ public class Game {
 
     public void pressRightButton(Coord coord) {
         flag.toggleFlaggedToBox(coord);
-        state = GameState.WINNER;
     }
 
+    public int getTotalBombs() {
+        return bomb.getTotalBombs();
+    }
+
+    public int getTotalFlaged() {
+        return flag.getTotalFlagged();
+    }
     public GameState getState() {
         return state;
     }
