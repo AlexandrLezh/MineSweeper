@@ -30,7 +30,16 @@ public class Game {
 
     public void pressLeftButton(Cell cell) {
         openBox(cell);
+        checkWinner();
+    }
 
+    private void checkWinner() {
+        if (GameState.PLAYED == state) {
+            if (flag.getTotalClosed() == bomb.getTotalBombs()) {
+                state = GameState.WINNER;
+                flag.setFlaggedToLastClosedBoxes();
+            }
+        }
     }
 
     public void pressRightButton(Cell cell) {

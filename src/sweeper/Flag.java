@@ -27,6 +27,7 @@ class Flag {
 
     void setOpenedToBox(Cell cell) {
         flagMap.set(cell, Box.OPENED);
+        totalClosed--; //todo move to setter
     }
 
     private void setFlaggedToBox(Cell cell) {
@@ -46,6 +47,11 @@ class Flag {
     }
 
 
-
-
+    public void setFlaggedToLastClosedBoxes() {
+        for (Cell cell : Ranges.getAllCoord()) {
+            if (Box.CLOSED == flagMap.get(cell)) {
+                setFlaggedToBox(cell);
+            }
+        }
+    }
 }
