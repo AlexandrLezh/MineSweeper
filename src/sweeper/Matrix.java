@@ -4,7 +4,7 @@ class Matrix {
     Box[][] matrix;
 
     Matrix(Box box) {
-        matrix = new Box[Ranges.getCell().x][Ranges.getCell().y];
+        matrix = new Box[Ranges.getSize().x][Ranges.getSize().y];
         for (Cell cell : Ranges.getAllCells()) {
             matrix[cell.x][cell.y] = box;
         }

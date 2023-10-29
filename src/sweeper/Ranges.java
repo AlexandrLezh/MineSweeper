@@ -4,35 +4,35 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ranges {
-    private static Cell cell;
+    private static Cell size;
     private static ArrayList<Cell> allCell;
     private static final Random random = new Random();
 
-    public static Cell getCell(){
-        return cell;
+    public static Cell getSize(){
+        return size;
     }
 
     public static ArrayList<Cell> getAllCells() {
         return allCell;
     }
 
-    static void setCell(Cell cell) {
-        Ranges.cell = cell;
+    static void setSize(Cell size) {
+        Ranges.size = size;
         allCell = new ArrayList<>();
-        for (int x = 0; x < cell.x; x++) {
-            for (int y = 0; y < cell.y; y++) {
+        for (int x = 0; x < size.x; x++) {
+            for (int y = 0; y < size.y; y++) {
                 allCell.add(new Cell(x, y));
             }
         }
     }
 
     static boolean inRange(Cell cell) {
-        return cell.x >= 0 && cell.x < Ranges.cell.x &&
-               cell.y >= 0 && cell.y < Ranges.cell.y;
+        return cell.x >= 0 && cell.x < Ranges.size.x &&
+               cell.y >= 0 && cell.y < Ranges.size.y;
     }
 
     static Cell getRandomCell() {
-        return new Cell(random.nextInt(cell.x), random.nextInt(cell.y));
+        return new Cell(random.nextInt(size.x), random.nextInt(size.y));
     }
 
     static ArrayList<Cell> getCellsAround(Cell cell) {
@@ -51,6 +51,6 @@ public class Ranges {
     }
 
     static int getSquare() {
-        return cell.x * cell.y;
+        return size.x * size.y;
     }
 }

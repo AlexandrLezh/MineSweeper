@@ -67,8 +67,8 @@ public class MineSweeper extends JFrame {
     }
 
     private void setUpPanelSize() {
-        int widthPanel = Ranges.getCell().x * IMAGE_SIZE;
-        int heightPanel = Ranges.getCell().y * IMAGE_SIZE;
+        int widthPanel = Ranges.getSize().x * IMAGE_SIZE;
+        int heightPanel = Ranges.getSize().y * IMAGE_SIZE;
 
         Dimension panelSize = new Dimension(widthPanel, heightPanel);
 

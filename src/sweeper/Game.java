@@ -9,7 +9,7 @@ public class Game {
     private GameState state;
 
     public Game(int cols, int rows, int bombs) {
-        Ranges.setCell(new Cell(cols, rows));
+        Ranges.setSize(new Cell(cols, rows));
         bomb = new Bomb(bombs);
         flag = new Flag();
 
