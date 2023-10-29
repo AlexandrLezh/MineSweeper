@@ -3,9 +3,6 @@ package sweeper;
 public class Game {
     private final Bomb bomb;
     private final Flag flag;
-
-
-
     private GameState state;
 
     public Game(int cols, int rows, int bombs) {
