@@ -1,10 +1,10 @@
 package sweeper;
 
-class Bomb {
+class BottomBombLayer {
     private Matrix bombMap;
     private int totalBombs;
 
-    Bomb(int totalBombs) {
+    BottomBombLayer(int totalBombs) {
         this.totalBombs = totalBombs;
         fixBombsCount();
     }
@@ -22,7 +22,7 @@ class Bomb {
 
     private void placeBomb() {
         while (true) {
-            Cell cell = Ranges.getRandomCell();
+            Cell cell = FieldOfGame.getRandomCell();
             if (Box.BOMB == bombMap.get(cell)) {
                 continue;
             }
@@ -33,7 +33,7 @@ class Bomb {
     }
 
     private void incNumbersAroundBomb(Cell cell) {
-        for (Cell around : Ranges.getCellsAround(cell)){
+        for (Cell around : FieldOfGame.getCellsAround(cell)){
             if (Box.BOMB != bombMap.get(around)) {
                 bombMap.set(around, bombMap.get(around).nextNumberBox());
             }
@@ -41,7 +41,7 @@ class Bomb {
     }
 
     private void fixBombsCount() {
-        int maxBombs = Ranges.getSize().x * Ranges.getSize().y / 2;
+        int maxBombs = FieldOfGame.getSize().x * FieldOfGame.getSize().y / 2;
         if (totalBombs > maxBombs) {
             totalBombs = maxBombs;
         }

@@ -1,7 +1,7 @@
 import sweeper.Box;
 import sweeper.Cell;
 import sweeper.Game;
-import sweeper.Ranges;
+import sweeper.FieldOfGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public class MineSweeper extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                for (Cell cell : Ranges.getAllCells()) {
+                for (Cell cell : FieldOfGame.getAllCells()) {
                     g.drawImage((Image) game.getBox(cell).image,
                             cell.x * IMAGE_SIZE,
                             cell.y * IMAGE_SIZE, this);
@@ -67,8 +67,8 @@ public class MineSweeper extends JFrame {
     }
 
     private void setUpPanelSize() {
-        int widthPanel = Ranges.getSize().x * IMAGE_SIZE;
-        int heightPanel = Ranges.getSize().y * IMAGE_SIZE;
+        int widthPanel = FieldOfGame.getSize().x * IMAGE_SIZE;
+        int heightPanel = FieldOfGame.getSize().y * IMAGE_SIZE;
 
         Dimension panelSize = new Dimension(widthPanel, heightPanel);
 
@@ -91,9 +91,10 @@ public class MineSweeper extends JFrame {
         }
         setIconImage(getImage("icon"));
     }
+
     private Image getImage(String name) {
         String fileName = "img/" + name + ".png";
-        ImageIcon icon = new ImageIcon(getClass().getResource(fileName));
+        ImageIcon icon = new ImageIcon(getClass().getResource(fileName)); //todo Optional???
         return icon.getImage();
     }
 

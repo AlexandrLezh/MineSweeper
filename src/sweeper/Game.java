@@ -1,35 +1,35 @@
 package sweeper;
 
 public class Game {
-    private final Bomb bomb;
-    private final Flag flag;
+    private final BottomBombLayer bottomBombLayer;
+    private final TopFlagLayer topFlagLayer;
     private GameState state;
 
     public Game(int cols, int rows, int bombs) {
-        Ranges.setSize(new Cell(cols, rows));
-        bomb = new Bomb(bombs);
-        flag = new Flag();
+        FieldOfGame.setSize(new Cell(cols, rows));
+        bottomBombLayer = new BottomBombLayer(bombs);
+        topFlagLayer = new TopFlagLayer();
 
     }
 
     public void start() {
-       bomb.start();
-       flag.start();
+       bottomBombLayer.start();
+       topFlagLayer.start();
        state = GameState.PLAYED;
     }
     public Box getBox(Cell cell) {
-        if (Box.OPENED == flag.get(cell)) {
-            return bomb.get(cell);
+        if (Box.OPENED == topFlagLayer.get(cell)) {
+            return bottomBombLayer.get(cell);
         } else {
-            return flag.get(cell);
+            return topFlagLayer.get(cell);
         }
     }
 
     private void checkWinner() {
         if (GameState.PLAYED == state) {
-            if (flag.getTotalClosed() == bomb.getTotalBombs()) {
+            if (topFlagLayer.getTotalClosed() == bottomBombLayer.getTotalBombs()) {
                 state = GameState.WINNER;
-                flag.setFlaggedToLastClosedBoxes();
+                topFlagLayer.setFlaggedToLastClosedBoxes();
             }
         }
     }
@@ -46,7 +46,7 @@ public class Game {
         if (isGameOver()) {
             return;
         }
-        flag.toggleFlaggedToBox(cell);
+        topFlagLayer.toggleFlaggedToBox(cell);
     }
 
     private boolean isGameOver() {
@@ -58,11 +58,11 @@ public class Game {
     }
 
     public int getTotalBombs() {
-        return bomb.getTotalBombs();
+        return bottomBombLayer.getTotalBombs();
     }
 
     public int getTotalFlaged() {
-        return flag.getTotalFlagged();
+        return topFlagLayer.getTotalFlagged();
     }
 
     public GameState getState() {
@@ -70,23 +70,26 @@ public class Game {
     }
 
     private void openBox(Cell cell) {
-        switch(flag.get(cell)) {
-            case OPENED : setOpenedToClosedBoxesAroundNumber(cell); break;
-            case FLAGGED : break;
-            case CLOSED :
-                switch (bomb.get(cell)) {
-                    case ZERO : openBoxesAroundZero(cell); break;
-                    case BOMB : openBombs(cell); break;
-                    default : flag.setOpenedToBox(cell); break;
-                }
+        switch(topFlagLayer.get(cell)) {
+            case OPENED -> setOpenedToClosedBoxesAroundNumber(cell);
+            case CLOSED -> getBottomLayer(cell);
+            case FLAGGED -> {}
+        }
+    }
+
+    private void getBottomLayer(Cell cell) {
+        switch (bottomBombLayer.get(cell)) {
+            case ZERO -> openBoxesAroundZero(cell);
+            case BOMB -> openBombs(cell);
+            default -> topFlagLayer.setOpenedToBox(cell);
         }
     }
 
     private void setOpenedToClosedBoxesAroundNumber(Cell cell) {
-        if (Box.BOMB != bomb.get(cell)) {
-            if (bomb.get(cell).getNumber() == flag.getCountOfFlaggedBoxesAround(cell)) {
-                for (Cell around : Ranges.getCellsAround(cell)) {
-                    if (Box.CLOSED == flag.get(around)) {
+        if (Box.BOMB != bottomBombLayer.get(cell)) {
+            if (bottomBombLayer.get(cell).getNumber() == topFlagLayer.getCountOfFlaggedBoxesAround(cell)) {
+                for (Cell around : FieldOfGame.getCellsAround(cell)) {
+                    if (Box.CLOSED == topFlagLayer.get(around)) {
                         openBox(around);
                     }
                 }
@@ -95,20 +98,20 @@ public class Game {
     }
 
     private void openBombs(Cell bombedCell) {
-        flag.setBombedToBox(bombedCell);
-        for (Cell cell : Ranges.getAllCells()) {
-            if (bomb.get(cell) == Box.BOMB) {
-                flag.setOpenedToClosedBox(cell);
+        topFlagLayer.setBombedToBox(bombedCell);
+        for (Cell cell : FieldOfGame.getAllCells()) {
+            if (bottomBombLayer.get(cell) == Box.BOMB) {
+                topFlagLayer.setOpenedToClosedBox(cell);
             } else {
-                flag.setNoBombToFlaggedBox(cell);
+                topFlagLayer.setNoBombToFlaggedBox(cell);
             }
         }
         state = GameState.BOMBED;
     }
 
     private void openBoxesAroundZero(Cell cell) {
-        flag.setOpenedToBox(cell);
-        for (Cell around : Ranges.getCellsAround(cell)) {
+        topFlagLayer.setOpenedToBox(cell);
+        for (Cell around : FieldOfGame.getCellsAround(cell)) {
             openBox(around);
         }
     }

@@ -1,6 +1,6 @@
 package sweeper;
 
-class Flag {
+class TopFlagLayer {
     private Matrix flagMap;
     private int totalFlagged;
     private int totalClosed;
@@ -8,7 +8,7 @@ class Flag {
     void start() {
         flagMap = new Matrix(Box.CLOSED);
         totalFlagged = 0;
-        totalClosed = Ranges.getSquare();
+        totalClosed = FieldOfGame.getSquare();
     }
 
     int getTotalFlagged() {
@@ -45,7 +45,7 @@ class Flag {
 
 
     public void setFlaggedToLastClosedBoxes() {
-        for (Cell cell : Ranges.getAllCells()) {
+        for (Cell cell : FieldOfGame.getAllCells()) {
             if (Box.CLOSED == flagMap.get(cell)) {
                 setFlaggedToBox(cell);
             }
@@ -70,7 +70,7 @@ class Flag {
 
     int getCountOfFlaggedBoxesAround(Cell cell) {
         int countFlags = 0;
-        for (Cell around : Ranges.getCellsAround(cell)) {
+        for (Cell around : FieldOfGame.getCellsAround(cell)) {
             if (flagMap.get(around) == Box.FLAGGED) {
                 countFlags++;
             }
